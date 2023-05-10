@@ -151,7 +151,7 @@ const OpenApi = () => {
           <ModalBody textAlign={'center'}>
             <Image
               style={{ margin: 'auto' }}
-              src={'/imgs/wx300-2.jpg'}
+              src={'/imgs/wx300.jpg'}
               width={200}
               height={200}
               alt=""
@@ -159,7 +159,7 @@ const OpenApi = () => {
             <Box mt={2}>
               微信号:
               <Box as={'span'} userSelect={'all'}>
-                YNyiqi
+                18599001010
               </Box>
             </Box>
             <Box>发送你的邀请链接和需要提现的金额</Box>

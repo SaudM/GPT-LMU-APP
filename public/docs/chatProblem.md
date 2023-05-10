@@ -21,7 +21,9 @@
 | 文件拆分 | 0.025 |
 
 **其他问题**
-请 WX 联系: fastgpt123
+
+请 WX 联系: 18599001010
 | 交流群 | 小助手 |
 | ----------------------- | -------------------- |
-| ![](https://otnvvf-imgs.oss.laf.run/wxqun300.jpg) | ![](https://otnvvf-imgs.oss.laf.run/wx300.jpg) |
+| ![](/imgs/wxqun300.jpg) | ![](/imgs/wx300.jpg) |
+

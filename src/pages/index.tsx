@@ -192,10 +192,11 @@ const Home = () => {
             </Link>
           )}
 
-          <Box>Made by FastGpt Team.</Box>
+          <Box>Build by 晓川</Box>
         </Card>
       </Box>
     </Flex>
+
   );
 };
 
