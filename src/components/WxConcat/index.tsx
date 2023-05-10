@@ -22,7 +22,7 @@ const WxConcat = ({ onClose }: { onClose: () => void }) => {
         <ModalBody textAlign={'center'}>
           <Image
             style={{ margin: 'auto' }}
-            src={'https://otnvvf-imgs.oss.laf.run/wx300.jpg'}
+            src={'https://docs.lumverse.com/f/5fcab6b74ec84e3a85ab/?dl=1'}
             width={'200px'}
             height={'200px'}
             alt=""

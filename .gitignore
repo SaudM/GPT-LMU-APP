@@ -7,6 +7,10 @@
 
 # testing
 /coverage
+/my-config
+
+.idea
+package-lock.json
 
 # next.js
 /.next/
