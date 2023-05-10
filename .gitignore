@@ -4,14 +4,10 @@ node_modules/
 /.pnp
 .pnp.js
 
-.idea
-
-package-lock.json
 
 # testing
 /coverage
 /my-config
-
 .idea
 package-lock.json
 
