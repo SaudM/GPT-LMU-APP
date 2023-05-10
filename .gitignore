@@ -1,5 +1,17 @@
 # dependencies
+/node_modules
 node_modules/
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+/my-config
+
+.idea
+package-lock.json
+
+
 # next.js
 .next/
 out/
