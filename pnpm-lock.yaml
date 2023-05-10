@@ -326,14 +326,6 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
 
-  /cors@2.8.5:
-    resolution: {integrity: sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==}
-    engines: {node: '>= 0.10'}
-    dependencies:
-      object-assign: 4.1.1
-      vary: 1.1.2
-    dev: false
-
   /fsevents@2.3.2:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -362,15 +354,14 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-<<<<<<< HEAD
+
   /request-ip/3.3.0:
     resolution: {integrity: sha512-cA6Xh6e0fDBBBwH77SLJaJPBmD3nWVAcF9/XAcsrIHdjhFzFiB5aNQFytdjCGPezU3ROwrR11IddKAM08vohxA==}
     dev: false
 
   /saslprep/1.0.3:
-=======
   /saslprep@1.0.3:
->>>>>>> 5f3f832 (rebase pnpm-lock.yaml)
+
     resolution: {integrity: sha512-/MY/PEMbk2SuY5sScONwhUDsV2p77Znkb/q3nSVstq/yQzYJOH/Azh29p9oJLsl3LnQwSvZDKagDGBsBwSooag==}
     engines: {node: '>=6'}
     requiresBuild: true
@@ -385,11 +376,6 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
-
-  /vary@1.1.2:
-    resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
-    engines: {node: '>= 0.8'}
-    dev: false
 
   registry.npmmirror.com/@alicloud/credentials@2.2.6:
     resolution: {integrity: sha512-jG+msY77dHmAF3x+8VTy7fEgORyXLHmDci8t92HeipBdCHsPptDegA++GEwKgR7f6G4wvafYt+aqMZ1iligdrQ==, registry: https://registry.npmjs.org/, tarball: https://registry.npmmirror.com/@alicloud/credentials/-/credentials-2.2.6.tgz}
@@ -7694,6 +7680,7 @@ packages:
     name: hast-util-from-parse5
     version: 7.1.2
     dependencies:
+
       '@types/hast': 2.3.4
       '@types/unist': registry.npmmirror.com/@types/unist@2.0.6
       hastscript: registry.npmmirror.com/hastscript@7.2.0
@@ -7701,6 +7688,7 @@ packages:
       vfile: registry.npmmirror.com/vfile@5.3.7
       vfile-location: registry.npmmirror.com/vfile-location@4.1.0
       web-namespaces: registry.npmmirror.com/web-namespaces@2.0.1
+
     dev: false
 
   registry.npmmirror.com/hast-util-is-element@2.1.3:
@@ -7708,8 +7696,10 @@ packages:
     name: hast-util-is-element
     version: 2.1.3
     dependencies:
+
       '@types/hast': 2.3.4
       '@types/unist': registry.npmmirror.com/@types/unist@2.0.6
+
     dev: false
 
   registry.npmmirror.com/hast-util-parse-selector@2.2.5:
@@ -7748,11 +7738,13 @@ packages:
     name: hastscript
     version: 6.0.0
     dependencies:
+
       '@types/hast': 2.3.4
       comma-separated-tokens: registry.npmmirror.com/comma-separated-tokens@1.0.8
       hast-util-parse-selector: registry.npmmirror.com/hast-util-parse-selector@2.2.5
       property-information: registry.npmmirror.com/property-information@5.6.0
       space-separated-tokens: registry.npmmirror.com/space-separated-tokens@1.1.5
+>>>>>>> 8d6970f (change logo,add config)
     dev: false
 
   registry.npmmirror.com/hastscript@7.2.0:
@@ -7760,11 +7752,13 @@ packages:
     name: hastscript
     version: 7.2.0
     dependencies:
+
       '@types/hast': 2.3.4
       comma-separated-tokens: registry.npmmirror.com/comma-separated-tokens@2.0.3
       hast-util-parse-selector: registry.npmmirror.com/hast-util-parse-selector@3.1.1
       property-information: registry.npmmirror.com/property-information@6.2.0
       space-separated-tokens: registry.npmmirror.com/space-separated-tokens@2.0.2
+
     dev: false
 
   registry.npmmirror.com/hexoid@1.0.0:
@@ -8711,9 +8705,15 @@ packages:
     name: mdast-util-definitions
     version: 5.1.2
     dependencies:
+
       '@types/mdast': registry.npmmirror.com/@types/mdast@3.0.10
       '@types/unist': 2.0.6
       unist-util-visit: registry.npmmirror.com/unist-util-visit@4.1.2
+
+      '@types/mdast': registry.npmmirror.com/@types/mdast/3.0.10
+      '@types/unist': 2.0.6
+      unist-util-visit: registry.npmmirror.com/unist-util-visit/4.1.2
+
     dev: false
 
   registry.npmmirror.com/mdast-util-find-and-replace@2.2.2:
@@ -8840,6 +8840,7 @@ packages:
     name: mdast-util-to-hast
     version: 12.3.0
     dependencies:
+
       '@types/hast': 2.3.4
       '@types/mdast': registry.npmmirror.com/@types/mdast@3.0.10
       mdast-util-definitions: registry.npmmirror.com/mdast-util-definitions@5.1.2
@@ -8848,6 +8849,7 @@ packages:
       unist-util-generated: registry.npmmirror.com/unist-util-generated@2.0.1
       unist-util-position: registry.npmmirror.com/unist-util-position@4.0.4
       unist-util-visit: registry.npmmirror.com/unist-util-visit@4.1.2
+
     dev: false
 
   registry.npmmirror.com/mdast-util-to-markdown@1.5.0:
@@ -11752,8 +11754,16 @@ packages:
     name: vfile-location
     version: 4.1.0
     dependencies:
+
       '@types/unist': 2.0.6
+
       vfile: registry.npmmirror.com/vfile@5.3.7
+
+      vfile: registry.npmmirror.com/vfile/5.3.7
+
+      '@types/unist': registry.npmmirror.com/@types/unist@2.0.6
+      vfile: registry.npmmirror.com/vfile@5.3.7
+
     dev: false
 
   registry.npmmirror.com/vfile-message@3.1.4:
