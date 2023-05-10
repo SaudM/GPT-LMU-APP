@@ -3,10 +3,7 @@
 * 计费方式二：如果使用本站余额，请参考下方价格表
 
 
-**问题文档**
-[先看文档，再提问](https://kjqvjse66l.feishu.cn/docx/HtrgdT0pkonP4kxGx8qcu6XDnGh)
-
-
+**问题文档**: [先看文档，再提问](https://kjqvjse66l.feishu.cn/docx/HtrgdT0pkonP4kxGx8qcu6XDnGh)  
 **价格表**
 如果使用了自己的 Api Key，网页上 openai 模型聊天不会计费。可以在账号页，看到详细账单。
 | 计费项 | 价格: 元/ 1K tokens（包含上下文）|
