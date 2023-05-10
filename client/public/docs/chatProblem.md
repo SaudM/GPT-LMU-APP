@@ -1,7 +1,7 @@
 ### 常见问题
 
 **Git 地址**
-[项目地址，完全开源，随便用。](https://github.com/c121914yu/FastGPT)
+[项目地址，完全开源，随便用。](https://github.com/SaudM/KnowBase)
 
 **问题文档**
 [先看文档，再提问](https://kjqvjse66l.feishu.cn/docx/HtrgdT0pkonP4kxGx8qcu6XDnGh)
