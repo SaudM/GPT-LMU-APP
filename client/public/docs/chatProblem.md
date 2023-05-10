@@ -20,11 +20,6 @@
 [先看文档，再提问](https://kjqvjse66l.feishu.cn/docx/HtrgdT0pkonP4kxGx8qcu6XDnGh)
 
 
-
-**请求次数太多了**
-一般是因为自己的 openai 账号异常。请先检查自己的账号是否正常使用。
-
-
 **价格表**
 如果使用了自己的 Api Key，网页上 openai 模型聊天不会计费。可以在账号页，看到详细账单。
 | 计费项 | 价格: 元/ 1K tokens（包含上下文）|
