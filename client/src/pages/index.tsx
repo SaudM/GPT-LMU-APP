@@ -25,6 +25,9 @@ const Home = () => {
     }
   }, [inviterId]);
 
+  const { data: { beianText = '' } = {} } = useQuery(['init'], getFilling);
+
+
   /* 加载动画 */
   useEffect(() => {
     setTimeout(() => {
@@ -224,10 +227,11 @@ const Home = () => {
             </Link>
           )}
 
-          <Box>Made by FastGpt Team.</Box>
+          <Box>Build by 晓川</Box>
         </Card>
       </Box>
     </Flex>
+
   );
 };
 
