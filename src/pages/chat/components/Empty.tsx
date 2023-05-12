@@ -16,7 +16,7 @@ const Empty = ({
   };
 }) => {
   const { data: chatProblem } = useMarkdown({ url: '/chatProblem.md' });
-  const { data: versionIntro } = useMarkdown({ url: '/versionIntro.md' });
+  // const { data: versionIntro } = useMarkdown({ url: '/versionIntro.md' });
 
   return (
     <Box
