@@ -57,9 +57,7 @@ const OpenApi = () => {
           FastGpt Api
         </Box>
         <Box fontSize={'sm'} mt={2}>
-          FastGpt Api 允许你将 Fast Gpt 的部分功能通过 api
-          的形式接入到自己的应用中，例如：飞书、企业微信、客服助手。请注意保管你的 Api
-          Key，不要泄露！
+        我们的知识库 API 可以将部分功能无缝集成到你的应用程序中，比如飞书、企业微信和客服助手等。请务必注意保管你的 API Key，确保其不被泄露
         </Box>
         <Box
           my={1}
