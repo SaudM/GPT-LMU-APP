@@ -15,7 +15,7 @@ const Empty = ({
     avatar: string;
   };
 }) => {
-  // const { data: chatProblem } = useMarkdown({ url: '/chatProblem.md' });
+  const { data: chatProblem } = useMarkdown({ url: '/chatProblem.md' });
   // const { data: versionIntro } = useMarkdown({ url: '/versionIntro.md' });
 
   return (
