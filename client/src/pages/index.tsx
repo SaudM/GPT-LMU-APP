@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Card, Box, Link, Flex, Image, Button } from '@chakra-ui/react';
 import Markdown from '@/components/Markdown';
 import { useMarkdown } from '@/hooks/useMarkdown';
@@ -6,8 +6,6 @@ import { useRouter } from 'next/router';
 import { useGlobalStore } from '@/store/global';
 
 import styles from './index.module.scss';
-import axios from 'axios';
-import MyIcon from '@/components/Icon';
 
 const Home = () => {
   const router = useRouter();
@@ -17,7 +15,6 @@ const Home = () => {
     isPc,
     initData: { beianText }
   } = useGlobalStore();
-  const [star, setStar] = useState(1500);
 
   useEffect(() => {
     if (inviterId) {
@@ -139,13 +136,6 @@ const Home = () => {
     }, 500);
   }, [isPc]);
 
-  useEffect(() => {
-    (async () => {
-      const { data: git } = await axios.get('https://api.github.com/repos/c121914yu/FastGPT');
-      setStar(git.stargazers_count);
-    })();
-  }, []);
-
   return (
     <Flex
       className={styles.home}
@@ -164,54 +154,37 @@ const Home = () => {
         position={'absolute'}
         userSelect={'none'}
       >
-        <Image src="/icon/logo2.png" w={['70px', '120px']} h={['70px', '120px']} alt={''}></Image>
+
+        <Image src="/icon/logo.png" w={['70px', '120px']} h={['70px', '120px']} alt={''}></Image>
         <Box
-          className={styles.textlg}
           fontWeight={'bold'}
           fontSize={['40px', '70px']}
           letterSpacing={'5px'}
+          color={'myBlue.600'}
         >
-          FastGpt
+
+           
         </Box>
-        <Box className={styles.textlg} fontWeight={'bold'} fontSize={['30px', '50px']}>
+        {/* <Box color={'myBlue.600'} fontSize={['30px', '50px']}>
           三分钟
-        </Box>
-        <Box className={styles.textlg} fontWeight={'bold'} fontSize={['30px', '50px']}>
-          搭建 AI 知识库
+        </Box> */}
+        <Box color={'myBlue.600'} fontSize={['30px', '50px']}>
+          LUM AI 知识库
+
         </Box>
 
-        <Flex flexDirection={['column', 'row']} my={5}>
-          <Button
-            mr={[0, 5]}
-            mb={[5, 0]}
-            fontSize={['xl', '3xl']}
-            h={'auto'}
-            py={[2, 3]}
-            variant={'base'}
-            border={'2px solid'}
-            borderColor={'myGray.800'}
-            transition={'0.3s'}
-            _hover={{
-              bg: 'myGray.800',
-              color: 'white'
-            }}
-            leftIcon={<MyIcon name={'git'} w={'20px'} />}
-            onClick={() => window.open('https://github.com/c121914yu/FastGPT', '_blank')}
-          >
-            Stars {(star / 1000).toFixed(1)}k
-          </Button>
-          <Button
-            fontSize={['xl', '3xl']}
-            h={'auto'}
-            py={[2, 3]}
-            onClick={() => router.push(`/model`)}
-          >
-            立即开始
-          </Button>
-        </Flex>
+        <Button
+          my={5}
+          fontSize={['xl', '3xl']}
+          h={'auto'}
+          py={[2, 3]}
+          onClick={() => router.push(`/model`)}
+        >
+          立即开始
+        </Button>
       </Flex>
 
-      <Box w={'100%'} mt={'100vh'} px={[5, 10]} pb={[5, 10]}>
+      {/* <Box w={'100%'} mt={'100vh'} px={[5, 10]} pb={[5, 10]}>
         <Card p={5} lineHeight={2}>
           <Markdown source={data} isChatting={false} />
         </Card>
@@ -225,7 +198,8 @@ const Home = () => {
 
           <Box>Build by 晓川</Box>
         </Card>
-      </Box>
+      </Box> */}
+
     </Flex>
 
   );
