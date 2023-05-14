@@ -1,6 +1,7 @@
 import { getSystemModelList } from '@/api/system';
 import type { ShareChatEditType } from '@/types/model';
 import type { ModelSchema } from '@/types/mongoSchema';
+import type { ShareChatEditType } from '@/types/model';
 
 export const embeddingModel = 'text-embedding-ada-002';
 export const embeddingPrice = 0.1;
