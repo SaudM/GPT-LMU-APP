@@ -32,6 +32,7 @@ import {
   TableContainer,
   Checkbox
 } from '@chakra-ui/react';
+import { DeleteIcon } from '@chakra-ui/icons';
 import { QuestionOutlineIcon } from '@chakra-ui/icons';
 import { useForm, UseFormReturn } from 'react-hook-form';
 import { ChatModelMap, ModelVectorSearchModeMap, getChatModelList } from '@/constants/model';
