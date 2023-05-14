@@ -156,6 +156,7 @@ const Home = () => {
         position={'absolute'}
         userSelect={'none'}
       >
+
         <Image src="/icon/logo.png" w={['70px', '120px']} h={['70px', '120px']} alt={''}></Image>
         <Box
           fontWeight={'bold'}
@@ -163,13 +164,17 @@ const Home = () => {
           letterSpacing={'5px'}
           color={'myBlue.600'}
         >
-          FastGpt
+
+           
         </Box>
-        <Box color={'myBlue.600'} fontSize={['30px', '50px']}>
+        {/* <Box color={'myBlue.600'} fontSize={['30px', '50px']}>
           三分钟
-        </Box>
+        </Box> */}
         <Box color={'myBlue.600'} fontSize={['30px', '50px']}>
-          搭建 AI 知识库
+          手边的 AI 知识库
+
+
+
         </Box>
 
         <Button
@@ -179,7 +184,7 @@ const Home = () => {
           py={[2, 3]}
           onClick={() => router.push(`/model`)}
         >
-          点击开始
+          立即开始
         </Button>
       </Flex>
 
@@ -198,6 +203,7 @@ const Home = () => {
           <Box>Build by 晓川</Box>
         </Card>
       </Box>
+
     </Flex>
 
   );
