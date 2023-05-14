@@ -44,6 +44,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const orderTime = dayjs(payOrder.createTime);
     const diffInHours = dayjs().diff(orderTime, 'hours');
 
+    // console.log("<--------------------->");
+    // console.log(payRes.trade_state);
+  
     if (payRes.trade_state === 'SUCCESS') {
       // 订单已支付
       try {
@@ -91,7 +94,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         data: '订单已过期'
       });
     } else {
-      throw new Error(payRes?.trade_state_desc || '订单无效');
+      throw new Error(payRes?.trade_state_desc || '订单不存在');
     }
   } catch (err) {
     // console.log(err);
