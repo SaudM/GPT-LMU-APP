@@ -162,15 +162,14 @@ const Home = () => {
           letterSpacing={'5px'}
           color={'myBlue.600'}
         >
-          FLT
+
+           
         </Box>
         {/* <Box color={'myBlue.600'} fontSize={['30px', '50px']}>
           三分钟
         </Box> */}
         <Box color={'myBlue.600'} fontSize={['30px', '50px']}>
-          手边的 AI 知识库
-
-
+          LUM AI 知识库
 
         </Box>
 
