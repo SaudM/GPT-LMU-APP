@@ -161,14 +161,15 @@ const Home = () => {
           letterSpacing={'5px'}
           color={'myBlue.600'}
         >
-
-           
+          LUM STUDIO 知识库
         </Box>
         {/* <Box color={'myBlue.600'} fontSize={['30px', '50px']}>
           三分钟
         </Box> */}
         <Box color={'myBlue.600'} fontSize={['30px', '50px']}>
-          LUM AI 知识库
+            
+
+
 
         </Box>
 
