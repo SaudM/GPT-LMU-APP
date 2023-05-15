@@ -791,7 +791,10 @@ const Chat = () => {
                           bg={'myBlue.300'}
                           onContextMenu={(e) => onclickContextMenu(e, item)}
                         >
-                          <Box as={'p'}>{item.value}</Box>
+                          <Box
+                            as={'p'}
+                            dangerouslySetInnerHTML={{ __html: formatLinkTextToHtml(item.value) }}
+                          />
                         </Card>
                       </Box>
                     )}
