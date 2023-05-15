@@ -161,8 +161,7 @@ const Home = () => {
           letterSpacing={'5px'}
           color={'myBlue.600'}
         >
-
-FLT
+          FLT
         </Box>
         {/* <Box color={'myBlue.600'} fontSize={['30px', '50px']}>
           三分钟
@@ -185,7 +184,7 @@ FLT
         </Button>
       </Flex>
 
-      <Box w={'100%'} mt={'100vh'} px={[5, 10]} pb={[5, 10]}>
+      {/* <Box w={'100%'} mt={'100vh'} px={[5, 10]} pb={[5, 10]}>
         <Card p={5} lineHeight={2}>
           <Markdown source={data} isChatting={false} />
         </Card>
@@ -199,7 +198,7 @@ FLT
 
           <Box>Build by 晓川</Box>
         </Card>
-      </Box>
+      </Box> */}
 
     </Flex>
 
