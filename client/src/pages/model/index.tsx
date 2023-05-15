@@ -44,6 +44,7 @@ export default Model;
 
 Model.getInitialProps = ({ query, req }: any) => {
   return {
-    modelId: query?.modelId || ''
+    modelId: query?.modelId || '',
+    isPcDevice: !/Mobile/.test(req?.headers?.['user-agent'])
   };
 };
