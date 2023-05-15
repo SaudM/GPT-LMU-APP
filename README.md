@@ -1,11 +1,11 @@
 # Fast GPT
 
-Fast GPT 允许你使用自己的 openai API KEY 来快速的调用 openai 接口，目前集成了 Gpt35, Gpt4 和 embedding. 可构建自己的知识库。
+Fast GPT 允许你使用自己的 openai API KEY 来快速的调用 openai 接口，目前集成了 gpt35 和 embedding. 可构建自己的知识库。
 
 ## 🛸 在线体验
 
-🎉 [fastgpt.run](https://fastgpt.run/)
-🎉 [ai.fastgpt.run](https://ai.fastgpt.run/)
+🎉 [https://ai.fulitimes.com](https://ai.fulitimes.com) 
+
 
 ![Demo](docs/imgs/demo.png?raw=true 'demo')
 
@@ -31,17 +31,14 @@ Fast GPT 允许你使用自己的 openai API KEY 来快速的调用 openai 接�
 
 ## 🏘️ 交流群
 
-添加 wx 进入：  
-![Demo](https://otnvvf-imgs.oss.laf.run/wx300.jpg)
+wx: mxh_88  
+![Demo](docs/imgs/wx300.jpg?raw=true 'wx')
 
 ## 👀 其他
 
-- [FastGpt 常见问题](https://kjqvjse66l.feishu.cn/docx/HtrgdT0pkonP4kxGx8qcu6XDnGh)
+- [FLT 常见问题](https://kjqvjse66l.feishu.cn/docx/HtrgdT0pkonP4kxGx8qcu6XDnGh)
 - [公众号接入](https://www.bilibili.com/video/BV1xh4y1t7fy/)
-- [FastGpt + Laf 最佳实践，将知识库装入公众号，点击去 Laf 公众号体验效果](https://b4jky7-fastgpt.oss.laf.run/lafercode.png)
-- [FastGpt V3.4 更新集合](https://www.bilibili.com/video/BV1Lo4y147Qh/?vd_source=92041a1a395f852f9d89158eaa3f61b4)
-- [FastGpt 知识库演示](https://www.bilibili.com/video/BV1Wo4y1p7i1/)
+- [FLT + Laf 最佳实践，将知识库装入公众号，点击去 Laf 公众号体验效果](https://b4jky7-fastgpt.oss.laf.run/lafercode.png)
+- [FLT V3.4 更新集合](https://www.bilibili.com/video/BV1Lo4y147Qh/?vd_source=92041a1a395f852f9d89158eaa3f61b4)
+- [FLT 知识库演示](https://www.bilibili.com/video/BV1Wo4y1p7i1/)
 
-## 🌟 Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=c121914yu/FastGPT&type=Date)](https://star-history.com/#c121914yu/FastGPT&Date)
