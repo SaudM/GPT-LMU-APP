@@ -1,4 +1,4 @@
-# Fast GPT
+# LMU AI 开放平台
 
 LMU AI开放平台允许你使用自己的 openai API KEY 来快速的调用 openai 接口，目前集成了 gpt35 和 embedding. 可构建自己的知识库。
 
@@ -27,7 +27,7 @@ LMU AI开放平台允许你使用自己的 openai API KEY 来快速的调用 ope
 
 ## :point_right: RoadMap
 
-- [FastGpt RoadMap](https://kjqvjse66l.feishu.cn/docx/RVUxdqE2WolDYyxEKATcM0XXnte)
+- [LMU RoadMap](https://kjqvjse66l.feishu.cn/docx/RVUxdqE2WolDYyxEKATcM0XXnte)
 
 ## 🏘️ 交流群
 
