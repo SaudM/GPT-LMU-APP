@@ -59,7 +59,15 @@ import styles from './index.module.scss';
 
 const textareaMinH = '22px';
 
-const Chat = ({ shareId, historyId }: { shareId: string; historyId: string }) => {
+const Chat = ({
+  shareId,
+  historyId,
+  isPcDevice
+}: {
+  shareId: string;
+  historyId: string;
+  isPcDevice: boolean;
+}) => {
   const router = useRouter();
   const theme = useTheme();
 
@@ -833,7 +841,8 @@ const Chat = ({ shareId, historyId }: { shareId: string; historyId: string }) =>
 Chat.getInitialProps = ({ query, req }: any) => {
   return {
     shareId: query?.shareId || '',
-    historyId: query?.historyId || ''
+    historyId: query?.historyId || '',
+    isPcDevice: !/Mobile/.test(req?.headers?.['user-agent'])
   };
 };
 
