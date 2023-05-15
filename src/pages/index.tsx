@@ -165,7 +165,7 @@ const Home = () => {
           color={'myBlue.600'}
         >
 
-           
+FLT
         </Box>
         {/* <Box color={'myBlue.600'} fontSize={['30px', '50px']}>
           三分钟
