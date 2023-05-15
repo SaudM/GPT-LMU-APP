@@ -935,7 +935,12 @@ const Chat = ({ modelId, chatId }: { modelId: string; chatId: string }) => {
 Chat.getInitialProps = ({ query, req }: any) => {
   return {
     modelId: query?.modelId || '',
+<<<<<<< HEAD
     chatId: query?.chatId || ''
+=======
+    chatId: query?.chatId || '',
+    isPcDevice: !/Mobile/.test(req?.headers?.['user-agent'])
+>>>>>>> 83ce86e (perf: error show)
   };
 };
 
