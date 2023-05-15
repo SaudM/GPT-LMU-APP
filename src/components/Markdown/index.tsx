@@ -7,6 +7,7 @@ import Icon from '@/components/Icon';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import rehypeRaw from 'rehype-raw';
 
 import 'katex/dist/katex.min.css';
 import styles from './index.module.scss';
@@ -33,7 +34,7 @@ const Markdown = ({
         isChatting ? (source === '' ? styles.waitingAnimation : styles.animation) : ''
       }`}
       remarkPlugins={[remarkMath]}
-      rehypePlugins={[remarkGfm, rehypeKatex]}
+      rehypePlugins={[rehypeRaw, remarkGfm, rehypeKatex]}
       components={{
         pre: 'div',
         code({ node, inline, className, children, ...props }) {
