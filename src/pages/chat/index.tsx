@@ -772,10 +772,7 @@ const Chat = ({ modelId, chatId }: { modelId: string; chatId: string }) => {
                           bg={'myBlue.300'}
                           onContextMenu={(e) => onclickContextMenu(e, item)}
                         >
-                          <Box
-                            as={'p'}
-                            dangerouslySetInnerHTML={{ __html: formatLinkTextToHtml(item.value) }}
-                          />
+                          <Box as={'p'}>{item.value}</Box>
                         </Card>
                       </Box>
                     )}

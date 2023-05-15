@@ -87,3 +87,9 @@ const Layout = ({ children }: { children: JSX.Element }) => {
 };
 
 export default Layout;
+
+Layout.getInitialProps = ({ req }: any) => {
+  return {
+    isPcDevice: !/Mobile/.test(req?.headers?.['user-agent'])
+  };
+};
