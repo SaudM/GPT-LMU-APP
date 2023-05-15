@@ -7,7 +7,7 @@
 复制.env.template 文件，生成一个.env.local 环境变量文件夹，修改.env.local 里内容。
 
 ```bash
-# proxy（可选）
+# proxy（可选）,海外服务器不需要配置
 AXIOS_PROXY_HOST=127.0.0.1
 AXIOS_PROXY_PORT=7890
 # email
@@ -40,6 +40,15 @@ PG_PORT=8100
 PG_USER=xxx
 PG_PASSWORD=xxx
 PG_DB_NAME=xxx
+
+
+#微信支付（可选）。
+WX_NOTIFY_URL=https://xxx.xxxxx.com/service/utils/wxpay #回调地址
+WX_V3_CODE=SDipvxxxxxxxxWvGtZ   #V3 密钥生成的字符串
+WX_SERIAL_NO=17A036AxxxxxxxxxxxxF7C #证书编号
+WX_APPID=wx9xxxxxxxxf0 #appid
+WX_MCHID=16xxxxxx33 #商户好
+WX_PRIVATE_KEY='-----BEGIN PRIVATE KEY-----你的密钥xxxxx----END PRIVATE KEY-----'
 ```
 
 ## 运行
