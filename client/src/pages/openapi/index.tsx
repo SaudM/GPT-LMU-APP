@@ -54,7 +54,7 @@ const OpenApi = () => {
     <Box py={[5, 10]} px={'5vw'}>
       <Card px={6} py={4} position={'relative'}>
         <Box fontSize={'xl'} fontWeight={'bold'}>
-          LUM STUDIO知识库的Api
+          LUM 知识库的Api
         </Box>
         <Box fontSize={'sm'} mt={2}>
         我们的知识库 API 可以将部分功能无缝集成到你的应用程序中，比如飞书、企业微信和客服助手等。请务必注意保管你的 API Key，确保其不被泄露
