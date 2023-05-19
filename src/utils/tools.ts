@@ -122,9 +122,7 @@ export const formatLinkText = (text: string) => {
 };
 
 export const getErrText = (err: any, def = '') => {
-  const msg = typeof err === 'string' ? err : err?.message || def || '';
-  msg && console.log('error =>', msg);
-  return msg;
+  return typeof err === 'string' ? err : err?.message || def;
 };
 
 export const delay = (ms: number) =>
