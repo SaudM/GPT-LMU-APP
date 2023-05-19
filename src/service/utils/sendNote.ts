@@ -19,11 +19,11 @@ const mailTransport = nodemailer.createTransport({
 
 const emailMap: { [key: string]: any } = {
   [UserAuthTypeEnum.register]: {
-    subject: '注册 LUM STUDIO 知识库账号',
+    subject: '注册 LUM 知识库账号',
     html: (code: string) => `<div>您正在注册 LUM STUDIO 知识库账号，验证码为：${code}</div>`
   },
   [UserAuthTypeEnum.findPassword]: {
-    subject: '修改 LUM STUDIO 知识库密码',
+    subject: '修改 LUM 知识库密码',
     html: (code: string) => `<div>您正在修改 LUM STUDIO 知识库账号密码，验证码为：${code}</div>`
   }
 };
