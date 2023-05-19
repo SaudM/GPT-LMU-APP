@@ -91,11 +91,11 @@ export default withNextCors(async function handler(req: NextApiRequest, res: Nex
               message: searchPrompts[0]?.value
             });
       }
-
-      systemPrompts = searchPrompts;
-    } else if (model.chat.systemPrompt) {
-      systemPrompts = [
-        {
+      prompts.splice(prompts.length - 3, 0, ...searchPrompts);
+    } else {
+      // 没有用知识库搜索，仅用系统提示词
+      model.chat.systemPrompt &&
+        prompts.splice(prompts.length - 3, 0, {
           obj: ChatRoleEnum.System,
           value: model.chat.systemPrompt
         }
