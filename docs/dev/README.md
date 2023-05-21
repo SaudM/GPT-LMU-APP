@@ -44,7 +44,6 @@ PG_USER=xxx
 PG_PASSWORD=xxx
 PG_DB_NAME=xxx
 
-
 #微信支付（可选）。
 WX_NOTIFY_URL=https://xxx.xxxxx.com/service/utils/wxpay #回调地址
 WX_V3_CODE=SDipvxxxxxxxxWvGtZ   #V3 密钥生成的字符串
