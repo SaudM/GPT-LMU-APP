@@ -138,7 +138,7 @@ const Navbar = () => {
           _hover={{
             color: '#ffffff'
           }}
-          onClick={() => window.open('https://github.com/c121914yu/FastGPT')}
+          onClick={() => window.open('https://github.com/SaudM/KnowBase')}
         >
           <MyIcon name={'git'} width={'22px'} height={'22px'} />
         </Flex>
