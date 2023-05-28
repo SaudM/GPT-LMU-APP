@@ -55,7 +55,7 @@ export default withNextCors(async function handler(req: NextApiRequest, res: Nex
       error: err
     });
   }
-}
+});
 
 export async function pushDataToKb({
   userId,
