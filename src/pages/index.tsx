@@ -22,8 +22,6 @@ const Home = () => {
     }
   }, [inviterId]);
 
-  const { data: { beianText = '' } = {} } = useQuery(['init'], getFilling);
-
 
   /* 加载动画 */
   useEffect(() => {
