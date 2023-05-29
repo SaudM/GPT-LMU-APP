@@ -59,14 +59,14 @@ const LoginForm = ({ setPageType, loginSuccess }: Props) => {
       <form onSubmit={handleSubmit(onclickLogin)}>
         <FormControl mt={8} isInvalid={!!errors.username}>
           <Input
-            placeholder="邮箱/手机号"
+            placeholder="邮箱"
             size={['md', 'lg']}
             {...register('username', {
-              required: '邮箱/手机号不能为空',
+              required: '邮箱不能为空',
               pattern: {
                 value:
                   /(^1[3456789]\d{9}$)|(^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$)/,
-                message: '邮箱/手机号格式错误'
+                message: '邮箱格式错误'
               }
             })}
           ></Input>
