@@ -8,8 +8,8 @@ import * as Util from '@alicloud/tea-util';
 
 const myEmail = process.env.MY_MAIL;
 const mailTransport = nodemailer.createTransport({
-  // host: 'smtp.qq.phone',
-  service: 'qq',
+  host: 'smtp.feishu.cn',
+  service: 'feishu',  
   secure: true, //安全方式发送,建议都加上
   auth: {
     user: myEmail,
@@ -20,18 +20,18 @@ const mailTransport = nodemailer.createTransport({
 const emailMap: { [key: string]: any } = {
   [UserAuthTypeEnum.register]: {
     subject: '注册 LUM 知识库账号',
-    html: (code: string) => `<div>您正在注册 LUM STUDIO 知识库账号，验证码为：${code}</div>`
+    html: (code: string) => `<div>您正在注册 LUM 知识库账号，验证码为：${code}</div>`
   },
   [UserAuthTypeEnum.findPassword]: {
     subject: '修改 LUM 知识库密码',
-    html: (code: string) => `<div>您正在修改 LUM STUDIO 知识库账号密码，验证码为：${code}</div>`
+    html: (code: string) => `<div>您正在修改 LUM 知识库账号密码，验证码为：${code}</div>`
   }
 };
 
 export const sendEmailCode = (email: string, code: string, type: `${UserAuthTypeEnum}`) => {
   return new Promise((resolve, reject) => {
     const options = {
-      from: `"FastGPT" ${myEmail}`,
+      from: `"LUM " ${myEmail}`,
       to: email,
       subject: emailMap[type]?.subject,
       html: emailMap[type]?.html(code)

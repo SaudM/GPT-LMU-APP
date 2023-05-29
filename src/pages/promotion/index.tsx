@@ -67,7 +67,7 @@ const OpenApi = () => {
           我的邀请
         </Box>
         <Box my={2} color={'blackAlpha.600'} fontSize={'sm'}>
-          你可以通过邀请链接邀请好友注册 FastGpt 账号。好友在 FastGpt
+          你可以通过邀请链接邀请好友注册 LUM 账号。好友在 LUM
           平台的每次充值，你都会获得一定比例的佣金。
         </Box>
         <Flex my={2} alignItems={'center'}>
