@@ -350,7 +350,7 @@ ${e.password ? `密码为: ${e.password}` : ''}`;
             <Box>
               <Flex mt={5} alignItems={'center'}>
                 <Box mr={1} fontSize={['sm', 'md']}>
-                  模型分享:
+                  应用分享:
                 </Box>
                 <Tooltip label="开启模型分享后，你的模型将会出现在共享市场，可供 FastGpt 所有用户使用。用户使用时不会消耗你的 tokens，而是消耗使用者的 tokens。">
                   <QuestionOutlineIcon mr={3} />
