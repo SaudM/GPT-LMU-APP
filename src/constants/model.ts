@@ -2,7 +2,6 @@ import { getSystemModelList } from '@/api/system';
 import type { ShareChatEditType } from '@/types/model';
 import type { ModelSchema } from '@/types/mongoSchema';
 
-
 export const embeddingModel = 'text-embedding-ada-002';
 export type EmbeddingModelType = 'text-embedding-ada-002';
 
