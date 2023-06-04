@@ -154,7 +154,6 @@ const Home = () => {
         position={'absolute'}
         userSelect={'none'}
       >
-
         <Image src="/icon/logo.png" w={['70px', '120px']} h={['70px', '120px']} alt={''}></Image>
         <Box
           fontWeight={'bold'}
@@ -167,12 +166,7 @@ const Home = () => {
         {/* <Box color={'myBlue.600'} fontSize={['30px', '50px']}>
           三分钟
         </Box> */}
-        <Box color={'myBlue.600'} fontSize={['30px', '50px']}>
-            
-
-
-
-        </Box>
+        <Box color={'myBlue.600'} fontSize={['30px', '50px']}></Box>
 
         <Button
           my={5}
@@ -200,9 +194,7 @@ const Home = () => {
           <Box>Build by 晓川</Box>
         </Card>
       </Box> */}
-
     </Flex>
-
   );
 };
 
