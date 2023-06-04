@@ -49,3 +49,6 @@ wx: mxh_88
 - [Laf 3 分钟快速接入三方应用](https://github.com/labring/laf)
 - [Sealos 快速部署集群应用](https://github.com/labring/sealos)
 
+## 感谢
+项目fork 的 ：https://github.com/c121914yu/FastGPT ，感谢作者对项目的开源和对商业化权对开放。
+目前代码和愿项目代码一致，未来在商业化上可能有所不通，未来会对应用商店进行二次开发，底层逻辑一致，但是商业化上可能存在较大区别。
