@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+.idea
+
+package-lock.json
+
 # testing
 /coverage
 /my-config
