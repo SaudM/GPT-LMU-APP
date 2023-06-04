@@ -18,7 +18,6 @@ export const getPayment = () => {
   });
 };
 
-
 export const nativePay = (amount: number, payId: string): Promise<string> =>
   getPayment()
     .native({
