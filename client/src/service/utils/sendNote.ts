@@ -9,7 +9,7 @@ import * as Util from '@alicloud/tea-util';
 const myEmail = process.env.MY_MAIL;
 const mailTransport = nodemailer.createTransport({
   host: 'smtp.feishu.cn',
-  service: 'feishu',  
+  service: 'feishu',
   secure: true, //安全方式发送,建议都加上
   auth: {
     user: myEmail,
