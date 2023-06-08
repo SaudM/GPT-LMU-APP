@@ -19,19 +19,19 @@ const mailTransport = nodemailer.createTransport({
 
 const emailMap: { [key: string]: any } = {
   [UserAuthTypeEnum.register]: {
-    subject: '注册 LUM 知识库账号',
-    html: (code: string) => `<div>您正在注册 LUM 知识库账号，验证码为：${code}</div>`
+    subject: '注册 LMU 知识库账号',
+    html: (code: string) => `<div>您正在注册 LMU 知识库账号，验证码为：${code}</div>`
   },
   [UserAuthTypeEnum.findPassword]: {
-    subject: '修改 LUM 知识库密码',
-    html: (code: string) => `<div>您正在修改 LUM 知识库账号密码，验证码为：${code}</div>`
+    subject: '修改 LMU 知识库密码',
+    html: (code: string) => `<div>您正在修改 LMU 知识库账号密码，验证码为：${code}</div>`
   }
 };
 
 export const sendEmailCode = (email: string, code: string, type: `${UserAuthTypeEnum}`) => {
   return new Promise((resolve, reject) => {
     const options = {
-      from: `"LUM " ${myEmail}`,
+      from: `"LMU " ${myEmail}`,
       to: email,
       subject: emailMap[type]?.subject,
       html: emailMap[type]?.html(code)
