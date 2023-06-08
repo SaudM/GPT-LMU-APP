@@ -22,7 +22,6 @@ const Home = () => {
     }
   }, [inviterId]);
 
-
   /* 加载动画 */
   useEffect(() => {
     setTimeout(() => {
@@ -154,18 +153,23 @@ const Home = () => {
         position={'absolute'}
         userSelect={'none'}
       >
-        <Image src="/icon/logo.png" w={['70px', '120px']} h={['70px', '120px']} alt={''}></Image>
-        <Box
-          fontWeight={'bold'}
-          fontSize={['40px', '70px']}
-          letterSpacing={'5px'}
-          color={'myBlue.600'}
-        >
-          LUM 知识库
+        <Image
+          src="/icon/logo-text.png"
+          w={['186px', '318px']}
+          h={['70px', '120px']}
+          alt={''}
+        ></Image>
+        {/*<Box*/}
+        {/*  fontWeight={'bold'}*/}
+        {/*  fontSize={['40px', '70px']}*/}
+        {/*  letterSpacing={'5px'}*/}
+        {/*  color={'myBlue.600'}*/}
+        {/*>*/}
+        {/*  LMU*/}
+        {/*</Box>*/}
+        <Box color={'myBlue.600'} fontSize={['30px', '50px']}>
+          用你的数据，定制一个你自己的AI吧！
         </Box>
-        {/* <Box color={'myBlue.600'} fontSize={['30px', '50px']}>
-          三分钟
-        </Box> */}
         <Box color={'myBlue.600'} fontSize={['30px', '50px']}></Box>
 
         <Button
