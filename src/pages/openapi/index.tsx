@@ -54,7 +54,7 @@ const OpenApi = () => {
     <Box py={[5, 10]} px={'5vw'}>
       <Card px={6} py={4} position={'relative'}>
         <Box fontSize={'xl'} fontWeight={'bold'}>
-          LUM 知识库的Api
+          LMU 知识库的Api
         </Box>
         <Box fontSize={'sm'} mt={2}>
           我们的知识库 API

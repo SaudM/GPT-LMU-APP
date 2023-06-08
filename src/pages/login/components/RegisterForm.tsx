@@ -81,7 +81,7 @@ const RegisterForm = ({ setPageType, loginSuccess }: Props) => {
   return (
     <>
       <Box fontWeight={'bold'} fontSize={'2xl'} textAlign={'center'}>
-        注册 LUM 账号
+        注册 LMU 账号
       </Box>
       <form onSubmit={handleSubmit(onclickRegister)}>
         <FormControl mt={5} isInvalid={!!errors.username}>
