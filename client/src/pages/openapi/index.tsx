@@ -54,14 +54,14 @@ const OpenApi = () => {
     <Box py={[5, 10]} px={'5vw'}>
       <Card px={6} py={4} position={'relative'}>
         <Box fontSize={'xl'} fontWeight={'bold'}>
-          LMU 知识库的Api
+          LMU 的Api
         </Box>
         <Box fontSize={'sm'} mt={2}>
-          我们的知识库 API
+          我们的开放平台 API
           可以将部分功能无缝集成到你的应用程序中，比如飞书、企业微信和客服助手等。请务必注意保管你的
           API Key，确保其不被泄露
         </Box>
-        <Box>使用 Fast Api 功能仅能使用平台余额。</Box>
+        <Box>使用 LMU Api 功能仅能使用平台余额。</Box>
         <Box
           my={1}
           as="a"
