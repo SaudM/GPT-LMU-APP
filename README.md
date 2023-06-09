@@ -29,9 +29,8 @@ LMU AI开放平台允许你使用自己的 openai API KEY 来快速的调用 ope
 
 - [LMU RoadMap](https://kjqvjse66l.feishu.cn/docx/RVUxdqE2WolDYyxEKATcM0XXnte)
 
-## 🏘️ 交流群
+## 🏘️ 业务沟通/技术支持
 
-wx: mxh_88  
 ![Demo](docs/imgs/wx300.jpg?raw=true 'wx')
 
 ## 👀 其他
