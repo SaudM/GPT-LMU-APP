@@ -39,7 +39,7 @@ wx: mxh_88
 
 - [FLT 常见问题](https://kjqvjse66l.feishu.cn/docx/HtrgdT0pkonP4kxGx8qcu6XDnGh)
 - [公众号接入](https://www.bilibili.com/video/BV1xh4y1t7fy/)
-- [FLT + Laf 最佳实践，将知识库装入公众号，点击去 Laf 公众号体验效果](https://b4jky7-fastgpt.oss.laf.run/lafercode.png)
+- [FLT + Laf 最佳实践，将AI程序接入公众号，点击去 Laf 公众号体验效果](https://b4jky7-fastgpt.oss.laf.run/lafercode.png)
 - [FLT V3.4 更新集合](https://www.bilibili.com/video/BV1Lo4y147Qh/?vd_source=92041a1a395f852f9d89158eaa3f61b4)
 - [FLT 知识库演示](https://www.bilibili.com/video/BV1Wo4y1p7i1/)
 
