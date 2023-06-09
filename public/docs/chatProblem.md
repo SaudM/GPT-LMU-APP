@@ -1,38 +1,17 @@
-### 常见问题
+### 价格说明
+* 计费方式一：如果使用了自己[openai的key](https://platform.openai.com/account/api-keys) ，本站不会计费。可以在[openai的余额账单](https://platform.openai.com/account/usage)。
+* 计费方式二：如果使用本站余额，请参考下方价格表
+
+| 计费项            | 价格: 元/ 1K tokens（包含上下文）|
+|----------------| ---- |
+| 知识库 - 索引       | 0.001 |
+| ChatGPT - 对话   | 0.025 |
+| GPT4 - 对话      | 0.5 |
+| 文件拆分           | 0.025 |
 
 
-**Git 地址**
-[项目地址，完全开源，随便用。](https://github.com/SaudM/KnowBase)
 
-**问题文档**
-[先看文档，再提问](https://kjqvjse66l.feishu.cn/docx/HtrgdT0pkonP4kxGx8qcu6XDnGh)
+### 业务咨询与技术支持
 
-
-**删除和复制**
-电脑端：聊天内容右侧有复制和删除的图标。
-移动端：点击对话头像，可以选择复制或删除该条内容。
-
-
-**请求次数太多了**
-一般是因为自己的 openai 账号异常。请先检查自己的账号是否正常使用。
-
-**问题文档**
-[先看文档，再提问](https://kjqvjse66l.feishu.cn/docx/HtrgdT0pkonP4kxGx8qcu6XDnGh)
-
-
-**价格表**
-如果使用了自己的 Api Key，网页上 openai 模型聊天不会计费。可以在账号页，看到详细账单。
-| 计费项 | 价格: 元/ 1K tokens（包含上下文）|
-| --- | --- |
-| 知识库 - 索引 | 0.001 |
-| chatgpt - 对话 | 0.025 |
-| gpt4 - 对话 | 0.5 |
-| 文件拆分 | 0.025 |
-
-**其他问题**
-
-请 WX 联系: 18599001010
-| 交流群 | 小助手 |
-| ----------------------- | -------------------- |
-| ![](/imgs/wxqun300.jpg) | ![](/imgs/wx300.jpg) |
+![](/imgs/wx300.jpg)
 
