@@ -15,7 +15,7 @@ const Empty = ({
     avatar: string;
   };
 }) => {
-  const { data: chatProblem } = useMarkdown({ url: '/chatProblem.md' });
+  // const { data: chatProblem } = useMarkdown({ url: '/chatProblem.md' });
   // const { data: versionIntro } = useMarkdown({ url: '/versionIntro.md' });
 
   return (
@@ -39,17 +39,17 @@ const Empty = ({
           <Box whiteSpace={'pre-line'}>{intro}</Box>
         </Card>
       )}
-      {showChatProblem && (
-        <>
-          {/* version intro */}
-          {/* <Card p={4} mb={10}>
-            <Markdown source={versionIntro} />
-          </Card> */}
-          <Card p={4}>
-            <Markdown source={chatProblem} />
-          </Card>
-        </>
-      )}
+      {/*{showChatProblem && (*/}
+      {/*  <>*/}
+      {/*    /!* version intro *!/*/}
+      {/*    /!* <Card p={4} mb={10}>*/}
+      {/*      <Markdown source={versionIntro} />*/}
+      {/*    </Card> *!/*/}
+      {/*    <Card p={4}>*/}
+      {/*      <Markdown source={chatProblem} />*/}
+      {/*    </Card>*/}
+      {/*  </>*/}
+      {/*)}*/}
     </Box>
   );
 };
