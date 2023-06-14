@@ -43,7 +43,7 @@ LMU AI开放平台允许你使用自己的 openai API KEY 来快速的调用 ope
 - [LMU 知识库演示](https://www.bilibili.com/video/BV1Wo4y1p7i1/)
 
 ## 感谢
-项目fork 的 ：https://github.com/c121914yu/FastGPT ，感谢作者对项目的开源和对商业化权的开放。
+[fork](https://github.com/c121914yu/FastGPT) 项目，感谢作者对项目的开源和对商业化权的开放。
 目前代码和愿项目代码一致，未来在商业化上可能有所不同，该项目会对应用商店进行二次开发，底层逻辑一致，但是商业化上可能存在较大区别。
 
 ## 未来
