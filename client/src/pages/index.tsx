@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Box, Link, Flex, Image, Button } from '@chakra-ui/react';
 import Markdown from '@/components/Markdown';
 import { useMarkdown } from '@/hooks/useMarkdown';
@@ -15,15 +15,13 @@ const Home = () => {
     isPc,
     initData: { beianText }
   } = useGlobalStore();
+  const [star, setStar] = useState(1500);
 
   useEffect(() => {
     if (inviterId) {
       localStorage.setItem('inviterId', inviterId);
     }
   }, [inviterId]);
-
-  const { data: { beianText = '' } = {} } = useQuery(['init'], getFilling);
-
 
   /* 加载动画 */
   useEffect(() => {
@@ -202,7 +200,6 @@ const Home = () => {
         </Card>
       </Box> */}
     </Flex>
-
   );
 };
 
