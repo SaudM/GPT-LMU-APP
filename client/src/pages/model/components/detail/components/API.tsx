@@ -8,7 +8,7 @@ const APIKeyModal = dynamic(() => import('@/components/APIKeyModal'), {
   ssr: true
 });
 
-const baseUrl = 'https://fastgpt.run/api/openapi';
+const baseUrl = 'https://ai.fulitimes.com/api/openapi';
 
 const API = ({ modelId }: { modelId: string }) => {
   const theme = useTheme();
@@ -67,7 +67,7 @@ const API = ({ modelId }: { modelId: string }) => {
               width: '100%',
               height: '100%'
             }}
-            src="https://kjqvjse66l.feishu.cn/docx/DmLedTWtUoNGX8xui9ocdUEjnNh"
+            src="https://vmoo.saud.net.cn/published/lmu/%E6%9C%8D%E5%8A%A1%E6%8E%A5%E5%85%A5/1-%E6%8E%A5%E5%85%A5%E6%96%87%E6%A1%A3API.md"
             frameBorder="0"
             onLoad={() => setIsLoaded(true)}
             onError={() => setIsLoaded(true)}
