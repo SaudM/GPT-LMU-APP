@@ -1,31 +1,29 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { jsonRes } from '@/service/response';
-import { authUser, getApiKey } from '@/service/utils/auth';
+import { authUser, getApiKey, getSystemOpenAiKey } from '@/service/utils/auth';
 import { withNextCors } from '@/service/utils/tools';
 import { getOpenAIApi } from '@/service/utils/chat/openai';
 import { embeddingModel } from '@/constants/model';
 import { axiosConfig } from '@/service/utils/tools';
 import { pushGenerateVectorBill } from '@/service/events/pushBill';
-import { ApiKeyType } from '@/service/utils/auth';
 import { OpenAiChatEnum } from '@/constants/model';
 
 type Props = {
   input: string[];
-  type?: ApiKeyType;
 };
 type Response = number[][];
 
 export default withNextCors(async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
   try {
     const { userId } = await authUser({ req });
-    let { input, type } = req.query as Props;
+    let { input } = req.query as Props;
 
     if (!Array.isArray(input)) {
       throw new Error('缺少参数');
     }
 
     jsonRes<Response>(res, {
-      data: await openaiEmbedding({ userId, input, type, mustPay: true })
+      data: await openaiEmbedding({ userId, input, mustPay: true })
     });
   } catch (err) {
     console.log(err);
@@ -39,18 +37,12 @@ export default withNextCors(async function handler(req: NextApiRequest, res: Nex
 export async function openaiEmbedding({
   userId,
   input,
-  mustPay = false,
-  type = 'chat'
+  mustPay = false
 }: { userId: string; mustPay?: boolean } & Props) {
-  const { userOpenAiKey, systemAuthKey } = await getApiKey({
-    model: OpenAiChatEnum.GPT35,
-    userId,
-    mustPay,
-    type
-  });
+  const apiKey = getSystemOpenAiKey();
 
   // 获取 chatAPI
-  const chatAPI = getOpenAIApi();
+  const chatAPI = getOpenAIApi(apiKey);
 
   // 把输入的内容转成向量
   const result = await chatAPI
@@ -61,16 +53,22 @@ export async function openaiEmbedding({
       },
       {
         timeout: 60000,
-        ...axiosConfig(userOpenAiKey || systemAuthKey)
+        ...axiosConfig(apiKey)
       }
     )
-    .then((res) => ({
-      tokenLen: res.data.usage.total_tokens || 0,
-      vectors: res.data.data.map((item) => item.embedding)
-    }));
+    .then((res) => {
+      if (!res.data?.usage?.total_tokens) {
+        // @ts-ignore
+        return Promise.reject(res.data?.error?.message || 'Embedding Error');
+      }
+      return {
+        tokenLen: res.data.usage.total_tokens || 0,
+        vectors: res.data.data.map((item) => item.embedding)
+      };
+    });
 
   pushGenerateVectorBill({
-    isPay: !userOpenAiKey,
+    isPay: mustPay,
     userId,
     text: input.join(''),
     tokenLen: result.tokenLen

@@ -74,9 +74,6 @@ export async function pushDataToKb({
   const set = new Set();
   const filterData: DateItemType[] = [];
 
-  const time = Date.now();
-  console.log('push data', data.length);
-
   data.forEach((item) => {
     const text = item.q + item.a;
 
@@ -156,8 +153,6 @@ export async function pushDataToKb({
   );
 
   insertData.length > 0 && startQueue();
-
-  console.log('push data finish', Date.now() - time);
 
   return {
     insertLen: insertData.length

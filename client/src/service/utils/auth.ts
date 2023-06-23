@@ -3,15 +3,15 @@ import jwt from 'jsonwebtoken';
 import Cookie from 'cookie';
 import { Chat, Model, OpenApi, User, ShareChat, KB } from '../mongo';
 import type { ModelSchema } from '@/types/mongoSchema';
-import type { ChatItemSimpleType } from '@/types/chat';
+import type { ChatItemType } from '@/types/chat';
 import mongoose from 'mongoose';
-import { ClaudeEnum, defaultModel, embeddingModel, EmbeddingModelType } from '@/constants/model';
+import { defaultModel } from '@/constants/model';
 import { formatPrice } from '@/utils/user';
 import { ERROR_ENUM } from '../errorCode';
 import { ChatModelType, OpenAiChatEnum } from '@/constants/model';
 import { hashPassword } from '@/service/utils/tools';
 
-export type ApiKeyType = 'training' | 'chat';
+export type AuthType = 'token' | 'root' | 'apikey';
 
 export const parseCookie = (cookie?: string): Promise<string> => {
   return new Promise((resolve, reject) => {
@@ -39,13 +39,11 @@ export const parseCookie = (cookie?: string): Promise<string> => {
 export const authUser = async ({
   req,
   authToken = false,
-  authOpenApi = false,
   authRoot = false,
   authBalance = false
 }: {
   req: NextApiRequest;
   authToken?: boolean;
-  authOpenApi?: boolean;
   authRoot?: boolean;
   authBalance?: boolean;
 }) => {
@@ -71,6 +69,36 @@ export const authUser = async ({
       return Promise.reject(error);
     }
   };
+  const parseAuthorization = async (authorization?: string) => {
+    if (!authorization) {
+      return Promise.reject(ERROR_ENUM.unAuthorization);
+    }
+
+    // Bearer fastgpt-xxxx-appId
+    const auth = authorization.split(' ')[1];
+    if (!auth) {
+      return Promise.reject(ERROR_ENUM.unAuthorization);
+    }
+
+    const { apiKey, appId } = await (async () => {
+      const arr = auth.split('-');
+      if (arr.length !== 3) {
+        return Promise.reject(ERROR_ENUM.unAuthorization);
+      }
+      return {
+        apiKey: `${arr[0]}-${arr[1]}`,
+        appId: arr[2]
+      };
+    })();
+
+    // auth apiKey
+    const uid = await parseOpenApiKey(apiKey);
+
+    return {
+      uid,
+      appId
+    };
+  };
   const parseRootKey = async (rootKey?: string, userId = '') => {
     if (!rootKey || !process.env.ROOT_KEY || rootKey !== process.env.ROOT_KEY) {
       return Promise.reject(ERROR_ENUM.unAuthorization);
@@ -78,31 +106,43 @@ export const authUser = async ({
     return userId;
   };
 
-  const { cookie, apikey, rootkey, userid } = (req.headers || {}) as {
+  const { cookie, apikey, rootkey, userid, authorization } = (req.headers || {}) as {
     cookie?: string;
     apikey?: string;
     rootkey?: string;
     userid?: string;
+    authorization?: string;
   };
 
   let uid = '';
+  let appId = '';
+  let authType: AuthType = 'token';
 
   if (authToken) {
     uid = await parseCookie(cookie);
-  } else if (authOpenApi) {
-    uid = await parseOpenApiKey(apikey);
+    authType = 'token';
   } else if (authRoot) {
     uid = await parseRootKey(rootkey, userid);
+    authType = 'root';
   } else if (cookie) {
     uid = await parseCookie(cookie);
+    authType = 'token';
   } else if (apikey) {
     uid = await parseOpenApiKey(apikey);
+    authType = 'apikey';
+  } else if (authorization) {
+    const authResponse = await parseAuthorization(authorization);
+    uid = authResponse.uid;
+    appId = authResponse.appId;
+    authType = 'apikey';
   } else if (rootkey) {
     uid = await parseRootKey(rootkey, userid);
+    authType = 'root';
   } else {
     return Promise.reject(ERROR_ENUM.unAuthorization);
   }
 
+  // balance check
   if (authBalance) {
     const user = await User.findById(uid);
     if (!user) {
@@ -115,42 +155,26 @@ export const authUser = async ({
   }
 
   return {
-    userId: uid
+    userId: uid,
+    appId,
+    authType
   };
 };
 
 /* random get openai api key */
-export const getSystemOpenAiKey = (type: ApiKeyType) => {
-  const keys = (() => {
-    if (type === 'training') {
-      return global.systemEnv.openAITrainingKeys?.split(',') || [];
-    }
-    return global.systemEnv.openAIKeys?.split(',') || [];
-  })();
-
-  // 纯字符串类型
-  const i = Math.floor(Math.random() * keys.length);
-  return keys[i] || (global.systemEnv.openAIKeys as string);
-};
-export const getGpt4Key = () => {
-  const keys = global.systemEnv.gpt4Key?.split(',') || [];
-
-  // 纯字符串类型
-  const i = Math.floor(Math.random() * keys.length);
-  return keys[i] || (global.systemEnv.openAIKeys as string);
+export const getSystemOpenAiKey = () => {
+  return process.env.ONEAPI_KEY || process.env.OPENAIKEY || '';
 };
 
 /* 获取 api 请求的 key */
 export const getApiKey = async ({
   model,
   userId,
-  mustPay = false,
-  type = 'chat'
+  mustPay = false
 }: {
   model: ChatModelType;
   userId: string;
   mustPay?: boolean;
-  type?: ApiKeyType;
 }) => {
   const user = await User.findById(userId);
   if (!user) {
@@ -160,28 +184,28 @@ export const getApiKey = async ({
   const keyMap = {
     [OpenAiChatEnum.GPT35]: {
       userOpenAiKey: user.openaiKey || '',
-      systemAuthKey: getSystemOpenAiKey(type) as string
+      systemAuthKey: getSystemOpenAiKey()
     },
     [OpenAiChatEnum.GPT3516k]: {
       userOpenAiKey: user.openaiKey || '',
-      systemAuthKey: getSystemOpenAiKey(type) as string
+      systemAuthKey: getSystemOpenAiKey()
     },
     [OpenAiChatEnum.GPT4]: {
       userOpenAiKey: user.openaiKey || '',
-      systemAuthKey: getGpt4Key() as string
+      systemAuthKey: getSystemOpenAiKey()
     },
     [OpenAiChatEnum.GPT432k]: {
       userOpenAiKey: user.openaiKey || '',
-      systemAuthKey: getGpt4Key() as string
-    },
-    [ClaudeEnum.Claude]: {
-      userOpenAiKey: '',
-      systemAuthKey: process.env.CLAUDE_KEY as string
+      systemAuthKey: getSystemOpenAiKey()
     }
   };
 
+  if (!keyMap[model]) {
+    return Promise.reject('App  model is exists');
+  }
+
   // 有自己的key
-  if (!mustPay && keyMap[model]?.userOpenAiKey) {
+  if (!mustPay && keyMap[model].userOpenAiKey) {
     return {
       user,
       userOpenAiKey: keyMap[model].userOpenAiKey,
@@ -240,7 +264,7 @@ export const authModel = async ({
 
   return {
     model,
-    showModelDetail: model.share.isShareDetail || userId === String(model.userId)
+    showModelDetail: userId === String(model.userId)
   };
 };
 
@@ -277,7 +301,7 @@ export const authChat = async ({
   });
 
   // 聊天内容
-  let content: ChatItemSimpleType[] = [];
+  let content: ChatItemType[] = [];
 
   if (chatId) {
     // 获取 chat 数据
@@ -336,27 +360,9 @@ export const authShareChat = async ({
     });
   }
 
-  const modelId = String(shareChat.modelId);
-  const userId = String(shareChat.userId);
-
-  // 获取 model 数据
-  const { model, showModelDetail } = await authModel({
-    modelId,
-    userId,
-    authOwner: false
-  });
-
-  // 获取 user 的 apiKey
-  const { userOpenAiKey, systemAuthKey } = await getApiKey({
-    model: model.chat.chatModel,
-    userId
-  });
-
   return {
-    userOpenAiKey,
-    systemAuthKey,
-    userId,
-    model,
-    showModelDetail
+    userId: String(shareChat.userId),
+    appId: String(shareChat.modelId),
+    authType: 'token' as AuthType
   };
 };

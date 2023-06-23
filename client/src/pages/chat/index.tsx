@@ -43,13 +43,13 @@ import { fileDownload } from '@/utils/file';
 import { htmlTemplate } from '@/constants/common';
 import { useUserStore } from '@/store/user';
 import Loading from '@/components/Loading';
-import Markdown from '@/components/Markdown';
 import SideBar from '@/components/SideBar';
 import Avatar from '@/components/Avatar';
 import Empty from './components/Empty';
 import QuoteModal from './components/QuoteModal';
 import { HUMAN_ICON } from '@/constants/chat';
 
+const Markdown = dynamic(async () => await import('@/components/Markdown'));
 const PhoneSliderBar = dynamic(() => import('./components/PhoneSliderBar'), {
   ssr: false
 });
@@ -59,6 +59,7 @@ const History = dynamic(() => import('./components/History'), {
 });
 
 import styles from './index.module.scss';
+import { adaptChatItem_openAI } from '@/utils/plugin/openai';
 
 const textareaMinH = '22px';
 
@@ -170,19 +171,15 @@ const Chat = ({ modelId, chatId }: { modelId: string; chatId: string }) => {
       controller.current = abortSignal;
       isLeavePage.current = false;
 
-      const prompt: ChatItemType[] = prompts.map((item) => ({
-        _id: item._id,
-        obj: item.obj,
-        value: item.value
-      }));
+      const messages = adaptChatItem_openAI({ messages: prompts, reserveId: true });
 
       // 流请求，获取数据
-      const { newChatId, quoteLen, systemPrompt } = await streamFetch({
-        url: '/api/chat/chat',
+      const { newChatId, quoteLen } = await streamFetch({
         data: {
-          prompt,
+          messages,
           chatId,
-          modelId
+          appId: modelId,
+          model: ''
         },
         onMessage: (text: string) => {
           setChatData((state) => ({
@@ -222,7 +219,7 @@ const Chat = ({ modelId, chatId }: { modelId: string; chatId: string }) => {
             ...item,
             status: 'finish',
             quoteLen,
-            systemPrompt
+            systemPrompt: chatData.systemPrompt
           };
         })
       }));
@@ -237,6 +234,7 @@ const Chat = ({ modelId, chatId }: { modelId: string; chatId: string }) => {
     [
       chatId,
       modelId,
+      chatData.systemPrompt,
       setChatData,
       loadHistory,
       loadMyModels,
@@ -328,8 +326,8 @@ const Chat = ({ modelId, chatId }: { modelId: string; chatId: string }) => {
 
   // 删除一句话
   const delChatRecord = useCallback(
-    async (index: number, historyId: string) => {
-      if (!messageContextMenuData) return;
+    async (index: number, historyId?: string) => {
+      if (!messageContextMenuData || !historyId) return;
       setIsLoading(true);
 
       try {
@@ -738,7 +736,6 @@ const Chat = ({ modelId, chatId }: { modelId: string; chatId: string }) => {
                           <Markdown
                             source={item.value}
                             isChatting={isChatting && index === chatData.history.length - 1}
-                            formatLink
                           />
                           <Flex>
                             {!!item.systemPrompt && (

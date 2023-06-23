@@ -7,13 +7,9 @@ import { ChatModelMap, OpenAiChatEnum } from '@/constants/model';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const chatModelList: ChatModelItemType[] = [];
 
-  if (global.systemEnv.openAIKeys) {
-    chatModelList.push(ChatModelMap[OpenAiChatEnum.GPT3516k]);
-    chatModelList.push(ChatModelMap[OpenAiChatEnum.GPT35]);
-  }
-  if (global.systemEnv.gpt4Key) {
-    chatModelList.push(ChatModelMap[OpenAiChatEnum.GPT4]);
-  }
+  chatModelList.push(ChatModelMap[OpenAiChatEnum.GPT3516k]);
+  chatModelList.push(ChatModelMap[OpenAiChatEnum.GPT35]);
+  chatModelList.push(ChatModelMap[OpenAiChatEnum.GPT4]);
 
   jsonRes(res, {
     data: chatModelList

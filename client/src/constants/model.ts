@@ -12,11 +12,8 @@ export enum OpenAiChatEnum {
   'GPT4' = 'gpt-4',
   'GPT432k' = 'gpt-4-32k'
 }
-export enum ClaudeEnum {
-  'Claude' = 'Claude'
-}
 
-export type ChatModelType = `${OpenAiChatEnum}` | `${ClaudeEnum}`;
+export type ChatModelType = `${OpenAiChatEnum}`;
 
 export type ChatModelItemType = {
   chatModel: ChatModelType;
@@ -34,7 +31,7 @@ export const ChatModelMap = {
     contextMaxToken: 4000,
     systemMaxToken: 2400,
     maxTemperature: 1.2,
-    price: 2.2
+    price: 1.5
   },
   [OpenAiChatEnum.GPT3516k]: {
     chatModel: OpenAiChatEnum.GPT3516k,
@@ -42,7 +39,7 @@ export const ChatModelMap = {
     contextMaxToken: 16000,
     systemMaxToken: 8000,
     maxTemperature: 1.2,
-    price: 2.5
+    price: 1.5
   },
   [OpenAiChatEnum.GPT4]: {
     chatModel: OpenAiChatEnum.GPT4,
@@ -50,7 +47,7 @@ export const ChatModelMap = {
     contextMaxToken: 8000,
     systemMaxToken: 4000,
     maxTemperature: 1.2,
-    price: 50
+    price: 10
   },
   [OpenAiChatEnum.GPT432k]: {
     chatModel: OpenAiChatEnum.GPT432k,
@@ -59,14 +56,6 @@ export const ChatModelMap = {
     systemMaxToken: 8000,
     maxTemperature: 1.2,
     price: 90
-  },
-  [ClaudeEnum.Claude]: {
-    chatModel: ClaudeEnum.Claude,
-    name: 'Claude(免费体验)',
-    contextMaxToken: 9000,
-    systemMaxToken: 2700,
-    maxTemperature: 1,
-    price: 0
   }
 };
 
@@ -94,6 +83,7 @@ export const defaultModel: ModelSchema = {
     searchEmptyText: '',
     systemPrompt: '',
     temperature: 0,
+    maxToken: 4000,
     chatModel: OpenAiChatEnum.GPT35
   },
   share: {

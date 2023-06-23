@@ -4,10 +4,9 @@ import { ChatItemType } from '@/types/chat';
 import { connectToDatabase, Chat, Model } from '@/service/mongo';
 import { authModel } from '@/service/utils/auth';
 import { authUser } from '@/service/utils/auth';
-import mongoose from 'mongoose';
+import { Types } from 'mongoose';
 
 type Props = {
-  newChatId?: string;
   chatId?: string;
   modelId: string;
   prompts: [ChatItemType, ChatItemType];
@@ -16,7 +15,7 @@ type Props = {
 /* 聊天内容存存储 */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const { chatId, modelId, prompts, newChatId } = req.body as Props;
+    const { chatId, modelId, prompts } = req.body as Props;
 
     if (!prompts) {
       throw new Error('缺少参数');
@@ -24,16 +23,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const { userId } = await authUser({ req, authToken: true });
 
-    const nId = await saveChat({
+    const response = await saveChat({
       chatId,
       modelId,
       prompts,
-      newChatId,
       userId
     });
 
     jsonRes(res, {
-      data: nId
+      data: response
     });
   } catch (err) {
     jsonRes(res, {
@@ -44,25 +42,31 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 }
 
 export async function saveChat({
-  chatId,
   newChatId,
+  chatId,
   modelId,
   prompts,
   userId
-}: Props & { userId: string }) {
+}: Props & { newChatId?: Types.ObjectId; userId: string }) {
   await connectToDatabase();
   const { model } = await authModel({ modelId, userId, authOwner: false });
 
   const content = prompts.map((item) => ({
-    _id: item._id ? new mongoose.Types.ObjectId(item._id) : undefined,
+    _id: item._id,
     obj: item.obj,
     value: item.value,
-    systemPrompt: item.systemPrompt,
+    systemPrompt: item.systemPrompt || '',
     quote: item.quote || []
   }));
 
-  const [id] = await Promise.all([
-    ...(chatId // update chat
+  if (String(model.userId) === userId) {
+    await Model.findByIdAndUpdate(modelId, {
+      updateTime: new Date()
+    });
+  }
+
+  const [response] = await Promise.all([
+    ...(chatId
       ? [
           Chat.findByIdAndUpdate(chatId, {
             $push: {
@@ -73,17 +77,21 @@ export async function saveChat({
             title: content[0].value.slice(0, 20),
             latestChat: content[1].value,
             updateTime: new Date()
-          }).then(() => '')
+          }).then(() => ({
+            newChatId: ''
+          }))
         ]
       : [
           Chat.create({
-            _id: newChatId ? new mongoose.Types.ObjectId(newChatId) : undefined,
+            _id: newChatId,
             userId,
             modelId,
             content,
             title: content[0].value.slice(0, 20),
             latestChat: content[1].value
-          }).then((res) => res._id)
+          }).then((res) => ({
+            newChatId: String(res._id)
+          }))
         ]),
     // update model
     ...(String(model.userId) === userId
@@ -96,6 +104,6 @@ export async function saveChat({
   ]);
 
   return {
-    id
+    ...response
   };
 }

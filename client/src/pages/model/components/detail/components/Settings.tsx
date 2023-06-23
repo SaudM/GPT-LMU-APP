@@ -24,7 +24,8 @@ const Settings = ({ modelId }: { modelId: string }) => {
   const { toast } = useToast();
   const router = useRouter();
   const { Loading, setIsLoading } = useLoading();
-  const { userInfo, modelDetail, loadModelDetail, refreshModel, setLastModelId } = useUserStore();
+  const { userInfo, modelDetail, myModels, loadModelDetail, refreshModel, setLastModelId } =
+    useUserStore();
   const { File, onOpen: onOpenSelectFile } = useSelectFile({
     fileType: '.jpg,.png',
     multiple: false
@@ -36,11 +37,6 @@ const Settings = ({ modelId }: { modelId: string }) => {
   const [btnLoading, setBtnLoading] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
-  const isOwner = useMemo(
-    () => modelDetail.userId === userInfo?._id,
-    [modelDetail.userId, userInfo?._id]
-  );
-
   const {
     register,
     setValue,
@@ -51,6 +47,20 @@ const Settings = ({ modelId }: { modelId: string }) => {
   } = useForm({
     defaultValues: modelDetail
   });
+
+  const isOwner = useMemo(
+    () => modelDetail.userId === userInfo?._id,
+    [modelDetail.userId, userInfo?._id]
+  );
+  const tokenLimit = useMemo(() => {
+    const max = ChatModelMap[getValues('chat.chatModel')]?.contextMaxToken || 4000;
+
+    if (max < getValues('chat.maxToken')) {
+      setValue('chat.maxToken', max);
+    }
+
+    return max;
+  }, [getValues, setValue, refresh]);
 
   // 提交保存模型修改
   const saveSubmitSuccess = useCallback(
@@ -110,7 +120,7 @@ const Settings = ({ modelId }: { modelId: string }) => {
         status: 'success'
       });
       refreshModel.removeModelDetail(modelDetail._id);
-      router.replace('/model');
+      router.replace(`/model?modelId=${myModels[1]?._id}`);
     } catch (err: any) {
       toast({
         title: err?.message || '删除失败',
@@ -118,7 +128,7 @@ const Settings = ({ modelId }: { modelId: string }) => {
       });
     }
     setIsLoading(false);
-  }, [modelDetail, setIsLoading, toast, refreshModel, router]);
+  }, [modelDetail, setIsLoading, toast, refreshModel, router, myModels]);
 
   const onSelectFile = useCallback(
     async (e: File[]) => {
@@ -147,6 +157,7 @@ const Settings = ({ modelId }: { modelId: string }) => {
     onSuccess(res) {
       res && reset(res);
       modelId && setLastModelId(modelId);
+      setRefresh(!refresh);
     },
     onError(err: any) {
       toast({
@@ -256,6 +267,28 @@ const Settings = ({ modelId }: { modelId: string }) => {
           />
         </Box>
       </Flex>
+      <Flex alignItems={'center'} mt={12} mb={10}>
+        <Box w={['60px', '100px', '140px']} flexShrink={0}>
+          最大长度
+        </Box>
+        <Box flex={1} ml={'10px'}>
+          <MySlider
+            markList={[
+              { label: '100', value: 100 },
+              { label: `${tokenLimit}`, value: tokenLimit }
+            ]}
+            width={['100%', '260px']}
+            min={100}
+            max={tokenLimit}
+            step={50}
+            activeVal={getValues('chat.maxToken')}
+            setVal={(val) => {
+              setValue('chat.maxToken', val);
+              setRefresh(!refresh);
+            }}
+          />
+        </Box>
+      </Flex>
       <Flex mt={10} alignItems={'flex-start'}>
         <Box w={['60px', '100px', '140px']} flexShrink={0}>
           提示词
@@ -276,6 +309,7 @@ const Settings = ({ modelId }: { modelId: string }) => {
           w={'120px'}
           size={['sm', 'md']}
           isLoading={btnLoading}
+          isDisabled={!isOwner}
           onClick={async () => {
             try {
               await saveUpdateModel();
@@ -289,7 +323,7 @@ const Settings = ({ modelId }: { modelId: string }) => {
             }
           }}
         >
-          保存
+          {isOwner ? '保存' : '仅读，无法修改'}
         </Button>
         <Button
           mr={3}
@@ -309,17 +343,20 @@ const Settings = ({ modelId }: { modelId: string }) => {
         >
           对话
         </Button>
-        <Button
-          colorScheme={'gray'}
-          variant={'base'}
-          size={['sm', 'md']}
-          isLoading={btnLoading}
-          _hover={{ color: 'red.600' }}
-          onClick={openConfirm(handleDelModel)}
-        >
-          删除
-        </Button>
+        {isOwner && (
+          <Button
+            colorScheme={'gray'}
+            variant={'base'}
+            size={['sm', 'md']}
+            isLoading={btnLoading}
+            _hover={{ color: 'red.600' }}
+            onClick={openConfirm(handleDelModel)}
+          >
+            删除
+          </Button>
+        )}
       </Flex>
+
       <File onSelect={onSelectFile} />
       <ConfirmChild />
       <Loading loading={isLoading} fixed={false} />

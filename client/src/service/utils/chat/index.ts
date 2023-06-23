@@ -1,35 +1,38 @@
-import { ChatItemSimpleType } from '@/types/chat';
+import { ChatItemType } from '@/types/chat';
 import { modelToolMap } from '@/utils/plugin';
 import type { ChatModelType } from '@/constants/model';
-import { ChatRoleEnum } from '@/constants/chat';
-import { OpenAiChatEnum, ClaudeEnum } from '@/constants/model';
+import { ChatRoleEnum, sseResponseEventEnum } from '@/constants/chat';
+import { sseResponse } from '../tools';
+import { OpenAiChatEnum } from '@/constants/model';
 import { chatResponse, openAiStreamResponse } from './openai';
-import { claudChat, claudStreamResponse } from './claude';
 import type { NextApiResponse } from 'next';
+import { textAdaptGptResponse } from '@/utils/adapt';
+import { parseStreamChunk } from '@/utils/adapt';
 
 export type ChatCompletionType = {
   apiKey: string;
   temperature: number;
-  messages: ChatItemSimpleType[];
+  maxToken?: number;
+  messages: ChatItemType[];
   chatId?: string;
   [key: string]: any;
 };
 export type ChatCompletionResponseType = {
   streamResponse: any;
-  responseMessages: ChatItemSimpleType[];
+  responseMessages: ChatItemType[];
   responseText: string;
   totalTokens: number;
 };
 export type StreamResponseType = {
   chatResponse: any;
-  prompts: ChatItemSimpleType[];
+  prompts: ChatItemType[];
   res: NextApiResponse;
   [key: string]: any;
 };
 export type StreamResponseReturnType = {
   responseContent: string;
   totalTokens: number;
-  finishMessages: ChatItemSimpleType[];
+  finishMessages: ChatItemType[];
 };
 
 export const modelServiceToolMap: Record<
@@ -74,15 +77,11 @@ export const modelServiceToolMap: Record<
         model: OpenAiChatEnum.GPT432k,
         ...data
       })
-  },
-  [ClaudeEnum.Claude]: {
-    chatCompletion: claudChat,
-    streamResponse: claudStreamResponse
   }
 };
 
 /* delete invalid symbol */
-const simplifyStr = (str: string) =>
+const simplifyStr = (str = '') =>
   str
     .replace(/\n+/g, '\n') // 连续空行
     .replace(/[^\S\r\n]+/g, ' ') // 连续空白内容
@@ -95,11 +94,11 @@ export const ChatContextFilter = ({
   maxTokens
 }: {
   model: ChatModelType;
-  prompts: ChatItemSimpleType[];
+  prompts: ChatItemType[];
   maxTokens: number;
 }) => {
-  const systemPrompts: ChatItemSimpleType[] = [];
-  const chatPrompts: ChatItemSimpleType[] = [];
+  const systemPrompts: ChatItemType[] = [];
+  const chatPrompts: ChatItemType[] = [];
 
   let rawTextLen = 0;
   prompts.forEach((item) => {
@@ -107,6 +106,7 @@ export const ChatContextFilter = ({
     rawTextLen += val.length;
 
     const data = {
+      _id: item._id,
       obj: item.obj,
       value: val
     };
@@ -129,7 +129,7 @@ export const ChatContextFilter = ({
   });
 
   // 根据 tokens 截断内容
-  const chats: ChatItemSimpleType[] = [];
+  const chats: ChatItemType[] = [];
 
   // 从后往前截取对话内容
   for (let i = chatPrompts.length - 1; i >= 0; i--) {
@@ -173,4 +173,87 @@ export const resStreamResponse = async ({
   });
 
   return { responseContent, totalTokens, finishMessages };
+};
+
+/* stream response */
+export const V2_StreamResponse = async ({
+  model,
+  res,
+  chatResponse,
+  prompts
+}: StreamResponseType & {
+  model: ChatModelType;
+}) => {
+  let responseContent = '';
+  let error: any = null;
+
+  const clientRes = async (data: string) => {
+    const { content = '' } = (() => {
+      try {
+        const json = JSON.parse(data);
+        const content: string = json?.choices?.[0].delta.content || '';
+        error = json.error;
+        responseContent += content;
+        return { content };
+      } catch (error) {
+        return {};
+      }
+    })();
+
+    if (res.closed || error) return;
+
+    if (data === '[DONE]') {
+      sseResponse({
+        res,
+        event: sseResponseEventEnum.answer,
+        data: textAdaptGptResponse({
+          text: null,
+          finish_reason: 'stop'
+        })
+      });
+      sseResponse({
+        res,
+        event: sseResponseEventEnum.answer,
+        data: '[DONE]'
+      });
+    } else {
+      sseResponse({
+        res,
+        event: sseResponseEventEnum.answer,
+        data: textAdaptGptResponse({
+          text: content
+        })
+      });
+    }
+  };
+
+  try {
+    for await (const chunk of chatResponse.data as any) {
+      if (res.closed) break;
+      const parse = parseStreamChunk(chunk);
+      parse.forEach((item) => clientRes(item.data));
+    }
+  } catch (error) {
+    console.log('pipe error', error);
+  }
+
+  if (error) {
+    return Promise.reject(error);
+  }
+
+  // count tokens
+  const finishMessages = prompts.concat({
+    obj: ChatRoleEnum.AI,
+    value: responseContent
+  });
+
+  const totalTokens = modelToolMap[model].countTokens({
+    messages: finishMessages
+  });
+
+  return {
+    responseContent,
+    totalTokens,
+    finishMessages
+  };
 };

@@ -36,7 +36,6 @@ LMU AI开放平台允许你使用自己的 openai API KEY 来快速的调用 ope
 ## 👀 其他
 
 - [LMU 常见问题](https://kjqvjse66l.feishu.cn/docx/HtrgdT0pkonP4kxGx8qcu6XDnGh)
-- [LMU 常见问题](https://kjqvjse66l.feishu.cn/docx/HtrgdT0pkonP4kxGx8qcu6XDnGh)
 - [docker 部署教程](https://www.bilibili.com/video/BV1jo4y147fT/)
 - [公众号接入](https://www.bilibili.com/video/BV1xh4y1t7fy/)
 - [LMU V3.4 更新集合](https://www.bilibili.com/video/BV1Lo4y147Qh/?vd_source=92041a1a395f852f9d89158eaa3f61b4)
