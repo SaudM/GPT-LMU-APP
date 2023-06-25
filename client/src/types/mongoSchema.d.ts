@@ -43,6 +43,7 @@ export interface ModelSchema {
     searchLimit: number;
     searchEmptyText: string;
     systemPrompt: string;
+    limitPrompt: string;
     temperature: number;
     maxToken: number;
     chatModel: ChatModelType; // 聊天时用的模型，训练后就是训练的模型
@@ -69,6 +70,7 @@ export interface TrainingDataSchema {
   _id: string;
   userId: string;
   kbId: string;
+  expireAt: Date;
   lockTime: Date;
   mode: `${TrainingModeEnum}`;
   prompt: string;

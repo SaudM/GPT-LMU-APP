@@ -43,9 +43,10 @@ LMU AI开放平台允许你使用自己的 openai API KEY 来快速的调用 ope
 
 ## Powered by
 
-- [TuShan 5 分钟搭建后台管理系统](https://github.com/msgbyte/tushan)
-- [Laf 3 分钟快速接入三方应用](https://github.com/labring/laf)
-- [Sealos 快速部署集群应用](https://github.com/labring/sealos)
+- [TuShan: 5 分钟搭建后台管理系统](https://github.com/msgbyte/tushan)
+- [Laf: 3 分钟快速接入三方应用](https://github.com/labring/laf)
+- [Sealos: 快速部署集群应用](https://github.com/labring/sealos)
+- [One API: 令牌管理 & 二次分发，支持 Azure](https://github.com/songquanpeng/one-api)
 
 ## 感谢
 [fork](https://github.com/c121914yu/FastGPT) 项目，感谢作者对项目的开源和对商业化权的开放。
