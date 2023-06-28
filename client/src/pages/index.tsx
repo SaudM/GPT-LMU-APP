@@ -25,9 +25,6 @@ const Home = () => {
     }
   }, [inviterId]);
 
-  const { data: { beianText = '' } = {} } = useQuery(['init'], getFilling);
-
-
   /* 加载动画 */
   useEffect(() => {
     setTimeout(() => {
@@ -227,11 +224,10 @@ const Home = () => {
             </Link>
           )}
 
-          <Box>Build by 晓川</Box>
+          <Box>Made by LMU Team.</Box>
         </Card>
       </Box>
     </Flex>
-
   );
 };
 
