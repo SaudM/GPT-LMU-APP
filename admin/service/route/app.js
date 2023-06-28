@@ -27,11 +27,18 @@ export const useAppRoute = (app) => {
       for (const modelRaw of modelsRaw) {
         const model = modelRaw.toObject();
 
+        // 检查模型是否存在
+        if (!model) {
+          console.error(`Model is null or undefined`);
+          continue; // 如果模型不存在，跳过这次循环
+        }
         // 获取与模型关联的知识库名称
         const kbNames = [];
         for (const kbId of model.chat.relatedKbs) {
           const kb = await Kb.findById(kbId);
-          kbNames.push(kb.name);
+          if (kb) {
+            kbNames.push(kb.name);
+          }
         }
 
         const orderedModel = {
