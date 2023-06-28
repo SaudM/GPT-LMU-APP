@@ -14,7 +14,7 @@ export const getPayment = () =>
 export const nativePay = async (amount: number, payId: string) => {
   try {
     const res = await getPayment().native({
-      description: 'Fast GPT 余额充值',
+      description: 'LMU 余额充值',
       out_trade_no: payId,
       amount: {
         total: amount
