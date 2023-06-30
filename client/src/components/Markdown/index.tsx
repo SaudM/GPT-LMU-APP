@@ -9,7 +9,7 @@ import 'katex/dist/katex.min.css';
 import styles from './index.module.scss';
 
 import Link from './Link';
-import CodeLight from './CodeLight';
+import CodeLight from './codeLight';
 import MermaidCodeBlock from './img/MermaidCodeBlock';
 import MdImage from './img/Image';
 
