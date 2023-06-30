@@ -22,5 +22,5 @@ export const ChatRoleMap = {
   }
 };
 
-export const HUMAN_ICON = `https://fastgpt.run/icon/human.png`;
-export const LOGO_ICON = `https://fastgpt.run/imgs/modelAvatar.png`;
+export const HUMAN_ICON = `https://docs.lumverse.com/f/a285a482b12846e7b270/?dl=1`;
+export const LOGO_ICON = `https://docs.lumverse.com/f/728df2efe2a948e49ff2/?dl=1`;
