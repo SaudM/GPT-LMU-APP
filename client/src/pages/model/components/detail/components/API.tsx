@@ -70,7 +70,7 @@ const API = ({ modelId }: { modelId: string }) => {
               width: '100%',
               height: '100%'
             }}
-            src="https://kjqvjse66l.feishu.cn/docx/DmLedTWtUoNGX8xui9ocdUEjnNh"
+            src="https://vmoo.saud.net.cn/published/lmu/home.md"
             frameBorder="0"
             onLoad={() => setIsLoaded(true)}
             onError={() => setIsLoaded(true)}
