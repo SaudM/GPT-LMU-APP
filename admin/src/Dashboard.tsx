@@ -16,13 +16,20 @@ import dayjs from 'dayjs';
 const authStorageKey = 'tushan:auth';
 const PRICE_SCALE = 100000;
 
-type fetchChatData = { count: number; date: string; increase?: number; increaseRate?: string };
+type fetchChatData = {
+  count: number;
+  total?: number;
+  date: string;
+  increase?: number;
+  increaseRate?: string;
+};
 
 type chatDataType = {
   date: string;
   userCount: number;
   userIncrease?: number;
   userIncreaseRate?: string;
+  payTotal: number;
   payCount: number;
 };
 
@@ -77,13 +84,17 @@ export const Dashboard: React.FC = React.memo(() => {
         }).then((res) => res.json())
       ]);
 
-      const data = userResponse.map((item, i) => ({
-        date: dayjs(item.date).format('MM/DD'),
-        userCount: item.count,
-        userIncrease: item.increase,
-        userIncreaseRate: item.increaseRate,
-        payCount: payResponse[i].count / PRICE_SCALE
-      }));
+      const data = userResponse.map((item, i) => {
+        const pay = payResponse.find((pay) => item.date === pay.date);
+        return {
+          date: dayjs(item.date).format('MM/DD'),
+          userCount: item.count,
+          userIncrease: item.increase,
+          userIncreaseRate: item.increaseRate,
+          payCount: pay ? pay.count / PRICE_SCALE : 0,
+          payTotal: pay?.total ? pay.total / PRICE_SCALE : 0
+        };
+      });
       setChatData(data);
     };
 
@@ -199,16 +210,19 @@ const CustomTooltip = ({ active, payload }: any) => {
         }}
       >
         <p className="label">
+          日期: <strong>{data.date}</strong>
+        </p>
+        <p className="label">
           用户总数: <strong>{data.userCount}</strong>
         </p>
         <p className="label">
-          60天累计支付: <strong>{data.payCount}</strong>元
+          用户今日增长数量: <strong>{data.userIncrease}</strong>
         </p>
         <p className="label">
-          用户昨日增长数量: <strong>{data.userIncrease}</strong>
+          今日支付: <strong>{data.payCount}</strong>元
         </p>
         <p className="label">
-          用户昨日增长比例: <strong>{data.userIncreaseRate}</strong>
+          60天累计支付: <strong>{data.payTotal}</strong>元
         </p>
       </div>
     );
@@ -230,7 +244,7 @@ const UserChart = ({ data }: { data: chatDataType[] }) => {
             <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
             <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
           </linearGradient>
-          <linearGradient id="payCount" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id="payTotal" x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
             <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
           </linearGradient>
@@ -248,10 +262,10 @@ const UserChart = ({ data }: { data: chatDataType[] }) => {
         />
         <Area
           type="monotone"
-          dataKey="payCount"
+          dataKey="payTotal"
           stroke="#8884d8"
           fillOpacity={1}
-          fill="url(#payCount)"
+          fill="url(#payTotal)"
         />
       </AreaChart>
     </ResponsiveContainer>
