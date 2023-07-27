@@ -9,7 +9,10 @@ export enum OpenAiChatEnum {
   'GPT35' = 'gpt-3.5-turbo',
   'GPT3516k' = 'gpt-3.5-turbo-16k',
   'GPT4' = 'gpt-4',
-  'GPT432k' = 'gpt-4-32k'
+  'GPT432k' = 'gpt-4-32k',
+  'ChatGMLPRO' = 'chatglm_pro',
+  'ChatGMLSTD' = 'chatglm_std',
+  'ChatGMLLITE' = 'chatglm_lite'
 }
 
 export type ChatModelType = `${OpenAiChatEnum}`;
@@ -55,13 +58,42 @@ export const ChatModelMap = {
     systemMaxToken: 8000,
     maxTemperature: 1.2,
     price: 90
+  },
+
+  [OpenAiChatEnum.ChatGMLPRO]: {
+    chatModel: OpenAiChatEnum.ChatGMLPRO,
+    name: '清华智谱 chatglm_pro',
+    contextMaxToken: 6000,
+    systemMaxToken: 2400,
+    maxTemperature: 1,
+    price: 1
+  },
+
+  [OpenAiChatEnum.ChatGMLSTD]: {
+    chatModel: OpenAiChatEnum.ChatGMLSTD,
+    name: '清华智谱 chatglm_std',
+    contextMaxToken: 4000,
+    systemMaxToken: 2400,
+    maxTemperature: 1,
+    price: 0.5
+  },
+  [OpenAiChatEnum.ChatGMLLITE]: {
+    chatModel: OpenAiChatEnum.ChatGMLLITE,
+    name: '清华智谱 chatglm_lite',
+    contextMaxToken: 4000,
+    systemMaxToken: 2400,
+    maxTemperature: 1,
+    price: 0.2
   }
 };
 
 export const chatModelList: ChatModelItemType[] = [
   ChatModelMap[OpenAiChatEnum.GPT3516k],
   ChatModelMap[OpenAiChatEnum.GPT35],
-  ChatModelMap[OpenAiChatEnum.GPT4]
+  ChatModelMap[OpenAiChatEnum.GPT4],
+  ChatModelMap[OpenAiChatEnum.ChatGMLPRO],
+  ChatModelMap[OpenAiChatEnum.ChatGMLSTD],
+  ChatModelMap[OpenAiChatEnum.ChatGMLLITE]
 ];
 
 export const defaultModel: ModelSchema = {
