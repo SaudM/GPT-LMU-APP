@@ -12,7 +12,8 @@ export enum OpenAiChatEnum {
   'GPT432k' = 'gpt-4-32k',
   'ChatGMLPRO' = 'chatglm_pro',
   'ChatGMLSTD' = 'chatglm_std',
-  'ChatGMLLITE' = 'chatglm_lite'
+  'ChatGMLLITE' = 'chatglm_lite',
+  'Claude2' = 'claude-2'
 }
 
 export type ChatModelType = `${OpenAiChatEnum}`;
@@ -84,6 +85,14 @@ export const ChatModelMap = {
     systemMaxToken: 2400,
     maxTemperature: 1,
     price: 0.2
+  },
+  [OpenAiChatEnum.Claude2]: {
+    chatModel: OpenAiChatEnum.Claude2,
+    name: '限免 claude-2',
+    contextMaxToken: 100000,
+    systemMaxToken: 50000,
+    maxTemperature: 1,
+    price: 0
   }
 };
 
@@ -93,7 +102,8 @@ export const chatModelList: ChatModelItemType[] = [
   ChatModelMap[OpenAiChatEnum.GPT4],
   ChatModelMap[OpenAiChatEnum.ChatGMLPRO],
   ChatModelMap[OpenAiChatEnum.ChatGMLSTD],
-  ChatModelMap[OpenAiChatEnum.ChatGMLLITE]
+  ChatModelMap[OpenAiChatEnum.ChatGMLLITE],
+  ChatModelMap[OpenAiChatEnum.Claude2]
 ];
 
 export const defaultModel: ModelSchema = {
